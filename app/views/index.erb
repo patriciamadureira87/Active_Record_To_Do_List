@@ -1,1 +1,36 @@
-<h1>Home Page</h1>
+<h1>To Do list</h1>
+<form class="todo_list" action="/tasks" method="post">
+  <label>
+    Title: <input type="text" name="title">
+  </label>
+  <button>Add task</button>
+</form>
+	
+<h2>To be Done</h2>
+<ul>
+	<% @incomplete.each do |task| %>
+		<li>
+			<p><%= task.title %></p> 
+			<p><%= task.completed %></p>
+			<a href="/tasks/check/<%=task.id%>">Check</a>
+			<form action="/tasks/remove/<%=task.id%>" method="post">
+				<button>Remove</button>
+			</form>
+		</li>
+	<% end %>
+	
+</ul>
+
+<h2>Done</h2>
+<ul>
+	<% @completed.each do |task| %>
+		<li>
+			<p><%= task.title %></p>
+			<p><%= task.completed %></p>
+			<form action="/tasks/remove/<%=task.id%>" method="post">
+				<button>Remove</button>
+			</form>
+		</li>
+	<% end %>
+	
+</ul>
